@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+
+search results for {{ query }}
+{{ results|length }} results found.<br><br> 
+{% if results %}
+{% for result in results %}
+
+{{ result.location }}<br>
+{{ result.rent }}<br>
+{{ result.bed_rooms }}<br>
+{{ result.posted_on }}<br>
+<a href="{% url 'products:update' result.id %}">Update</a>
+<a href="{% url 'products:delete' result.id %}">Delete</a>  
+<br><br>
+
+
+
+{% endfor %}
+
+{% endif %}
+{% endblock %}
+

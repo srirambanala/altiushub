@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+<h1>{% block title %}Products{% endblock %}</h1>
+
+{% block content %}
+
+<form method="POST" action="/search/<str:query>/">
+    {% csrf_token %}
+    <input type="text" name="query" placeholder="Search by city..." required>
+    <input type="number" name="rent" placeholder="Min Rent" required>
+    <input type="number" name="rent" placeholder="Max Rent" required>
+    <button type="submit">Search</button>
+
+
+{% for product in context %}
+
+<p>Location : {{ product.location }}</p>
+<p>Rent : {{ product.rent }}</p>
+<p>BedRooms : {{ product.bed_rooms }} </p>
+<p> Posted on : {{ product.posted_on }} </p>
+
+<a href="{% url 'products:update' product.id %}">Update</a>
+<a href="{% url 'products:delete' product.id %}">Delete</a>
+
+<br><br>
+</p>
+{% endfor %}
+{% endblock %}
+
